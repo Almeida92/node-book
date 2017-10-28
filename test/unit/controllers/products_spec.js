@@ -8,7 +8,6 @@ describe('Controller: Products', () => {
         price: 100
     }];
 
-
     describe('get() products', () => {
         it('should return a list of products', () => {
             const request = {};
