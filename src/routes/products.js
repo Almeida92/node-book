@@ -1,5 +1,6 @@
 import express from 'express';
 import ProductsController from '../controllers/products';
+import mongoose from 'mongoose';
 
 const router = express.Router();
 const productsController = new ProductsController();
