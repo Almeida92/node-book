@@ -1,9 +1,28 @@
+import Product from '../../../src/models/product';
+
 describe('Routes: Products', () => {
   const defaultProduct = {
     name: 'Default product',
     description: 'product description',
     price: 100
   };
+
+  const expectProduct = {
+    __v: 0,
+    _id: '56cb91bdc3464f14678934ca',
+    name: 'Default product',
+    description: 'product description',
+    price: 100
+  };
+
+  beforeEach(() => {
+    const product = new Product(defaultProduct);
+    product._id = '56cb91bdc3464f14678934ca';
+    return Product.remove({})
+      .then(() => product.save());
+  });
+
+  afterEach(() => Product.remove({}));
 
   let request;
 
@@ -21,7 +40,7 @@ describe('Routes: Products', () => {
         .get('/products')
         .end((err, res) => {
           console.log(res.body[0]);
-          expect(res.body[0]).to.eql(defaultProduct);
+          expect(res.body).to.eql([expectProduct]);
           done(err);
         });
     });
